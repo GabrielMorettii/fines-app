@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model usuarios {
+  id       Int    @id @unique(map: "id") @default(autoincrement()) @db.Int
+  username String @db.VarChar(255)
+  senha    String @db.VarChar(255)
+}
+
+model multas {
+  id            Int      @id @unique(map: "id") @default(autoincrement()) @db.Int
+  placa_veiculo String   @db.VarChar(7)
+  descricao     String   @db.VarChar(255)
+  valor         Decimal  @db.Decimal(10, 2)
+  servico       String   @db.VarChar(255)
+  estado        String   @db.VarChar(2)
+  data_infracao DateTime @db.Date
+
+  veiculo veiculos @relation("veiculosToMultas", fields: [placa_veiculo], references: [placa], onDelete: NoAction, onUpdate: NoAction, map: "fk_multas_placa_veiculo")
+}
+
+model veiculos {
+  id      Int    @id @unique(map: "id") @default(autoincrement()) @db.Int
+  placa   String @unique @db.VarChar(7)
+  modelo  String @db.VarChar(100)
+  chassi  String @db.VarChar(17)
+  estado  String @db.VarChar(2)
+  renavam String @db.VarChar(11)
+
+  multas multas[] @relation("veiculosToMultas")
+}
