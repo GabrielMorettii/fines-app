@@ -42,7 +42,7 @@ $ docker-compose up -d
 
 $ cd api
 
-$ docker-compose up 
+$ docker-compose up -d 
 
 $ npm install
 
@@ -62,7 +62,7 @@ $ docker-compose stop
 
 # esteja no root do projeto
 
-$ docker-compose up
+$ docker-compose up -d
 
 $ cd client
 
