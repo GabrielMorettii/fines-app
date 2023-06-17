@@ -2,6 +2,11 @@
 
 Este é um projeto que permite consultar informações sobre multas de trânsito e também possui um sistema de autenticação para garantir o acesso aos dados protegidos.
 
+## 👀 Observações
+
+- Deixei os .envs prontos e visíveis de propósito.
+- Também mantive um dump do banco para facilitar durante a reprodução.
+
 ## 💻 Setup do Ambiente <a name="enviroment-setup" />:
 
 ```bash
