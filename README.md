@@ -6,6 +6,9 @@ Este é um projeto que permite consultar informações sobre multas de trânsito
 
 - Deixei os .envs prontos e visíveis de propósito.
 - Também mantive um dump do banco para facilitar durante a reprodução.
+- Caso não queira passar pelo processo de cadastro ou por qualquer outro motivo pode utilizar as credenciais:
+  - Usuário: Gabriel Moretti
+  - Senha: 123123
 
 ## 💻 Setup do Ambiente <a name="enviroment-setup" />:
 
