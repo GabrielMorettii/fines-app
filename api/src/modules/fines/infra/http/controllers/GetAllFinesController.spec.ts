@@ -2,7 +2,7 @@ import request from "supertest";
 
 import app from "@shared/infra/http/app";
 
-import { EnumServiceTypes } from "@modules/fines/dtos/EnumServiceTypes";
+import { EnumServiceTypes } from "@modules/fines/dtos";
 
 describe("Get All Fines Controller", () => {
   describe("Success Cases", () => {

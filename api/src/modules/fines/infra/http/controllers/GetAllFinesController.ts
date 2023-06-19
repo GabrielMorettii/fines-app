@@ -1,8 +1,8 @@
 import { container } from "tsyringe";
 import { Request, Response } from "express";
 
-import { GetAllFineUseCase } from "../useCases/GetAllFineUseCase";
-import { IGetOneFineDto } from "../dtos";
+import { IGetOneFineDto } from "@modules/fines/dtos";
+import { GetAllFineUseCase } from "@modules/fines/useCases/GetAllFineUseCase";
 
 class GetAllFinesController {
   async handle(request: Request, response: Response): Promise<Response> {

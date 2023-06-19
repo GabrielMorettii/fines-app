@@ -1,10 +1,9 @@
 import request from "supertest";
 
-import app from "@shared/infra/http/app";
-
-import { prisma } from "@libs/prisma";
-
 import { hash } from 'bcrypt';
+
+import app from "@shared/infra/http/app";
+import { prisma } from "@shared/infra/prisma/client";
 
 describe("Sign In User Controller", () => {
   beforeAll(async () => {

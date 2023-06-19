@@ -1,9 +1,7 @@
-import { ICreateUserDto } from "../dtos/ICreateUserDto"
-import { IUserDto } from "../dtos/IUserDto"
-
+import { IUserDto, ICreateUserDto } from "../dtos"
 interface IUserRepository{
   create(data: ICreateUserDto): Promise<IUserDto>
-  findByUsername(username: string): Promise<IUserDto>
+  findByUsername(username: string): Promise<IUserDto | null>
 }
 
 export {IUserRepository}

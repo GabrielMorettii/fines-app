@@ -1,10 +1,15 @@
 import { container } from "tsyringe";
 
-import { IUserRepository } from "@modules/users/repositories/IUserRepository";
-import { IFineRepository } from "@modules/fines/repositories/IFineRepository";
+import { IUserRepository, UsersRepository } from "@modules/users/repositories";
+import { IFineRepository, FinesRepository } from "@modules/fines/repositories";
 
-import { UsersRepository } from "@modules/users/repositories/implementations/UsersRepository";
-import { FinesRepository } from "@modules/fines/repositories/implementations/FinesRepository";
+import './providers';
 
-container.registerSingleton<IFineRepository>('FinesRepository', FinesRepository)
-container.registerSingleton<IUserRepository>('UsersRepository', UsersRepository)
+container.registerSingleton<IFineRepository>(
+  "FinesRepository",
+  FinesRepository
+);
+container.registerSingleton<IUserRepository>(
+  "UsersRepository",
+  UsersRepository
+);

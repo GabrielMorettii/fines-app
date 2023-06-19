@@ -1,8 +1,12 @@
-import { ICreateUserDto } from "../dtos/ICreateUserDto";
-import { IUserDto } from "../dtos/IUserDto";
+import { usuarios } from "@prisma/client";
+
+import { ICreateUserDto } from "../dtos";
 
 class UserMap {
-  static toRepository({ username, password }: ICreateUserDto) {
+  static toRepository({
+    username,
+    password,
+  }: ICreateUserDto): Omit<usuarios, "id"> {
     const user = {
       username,
       senha: password,
@@ -11,7 +15,7 @@ class UserMap {
     return user;
   }
 
-  static toHTTP({ id, username }: IUserDto) {
+  static toHTTP({ id, username }: usuarios) {
     const user = {
       id,
       username,

@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import { prisma } from "@libs/prisma";
-import { IVehiclesRepository } from "../IVehiclesRepository";
-import { IGetOneVehicleDto, IVehicleDto } from "@modules/fines/dtos";
+import { IGetOneVehicleDto } from "@modules/fines/dtos";
 import { VehicleMap } from "@modules/fines/mappers/VehicleMap";
+import { IVehiclesRepository } from "@modules/fines/repositories";
+import { prisma } from "@shared/infra/prisma/client";
 
 export class VehiclesRepository implements IVehiclesRepository {
   private prisma: PrismaClient;

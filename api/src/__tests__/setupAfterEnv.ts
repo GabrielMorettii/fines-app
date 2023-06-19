@@ -1,4 +1,4 @@
-import { prisma } from "@libs/prisma";
+import { prisma } from "@shared/infra/prisma/client";
 
 global.afterAll(async () => {
   try {

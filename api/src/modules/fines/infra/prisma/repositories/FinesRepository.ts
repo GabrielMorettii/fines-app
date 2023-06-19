@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { prisma } from "@libs/prisma";
-import { IFineRepository  } from "../IFineRepository";
 import { IFineDto } from "@modules/fines/dtos/IFineDto";
 import { FineMap } from "@modules/fines/mappers/FineMap";
 import { IGetOneFineProps } from "@modules/fines/dtos/IGetOneFineProps";
+import { IFineRepository } from "@modules/fines/repositories";
+import { prisma } from "@shared/infra/prisma/client";
 
 export class FinesRepository implements IFineRepository {
   private prisma: PrismaClient;
@@ -13,7 +13,16 @@ export class FinesRepository implements IFineRepository {
   }
 
   async findAll(data: IGetOneFineProps): Promise<IFineDto[]> {
-    const fines = await this.prisma.multas.findMany(data);
+    const fines = await this.prisma.multas.findMany({
+      where: data,
+      include: {
+        veiculo: {
+          select: {
+            chassi: true,
+          },
+        },
+      }
+    });
 
     return FineMap.toHTTPs(fines);
   }

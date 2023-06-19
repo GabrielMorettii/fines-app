@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-
-import { ISignInUserDto } from "../dtos/ISignInUserDto";
-import { SignInUserUseCase } from "../useCases/SignInUserUseCase";
+import { ISignInUserDto } from "@modules/users/dtos";
+import { SignInUserUseCase } from "@modules/users/useCases/SignInUserUseCase";
 
 class SignInUserController {
   async handle(request: Request, response: Response): Promise<Response> {

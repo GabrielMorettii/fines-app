@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { IUserRepository } from "../IUserRepository";
-import { IUserDto } from "../../dtos/IUserDto";
-import { ICreateUserDto } from "../../dtos/ICreateUserDto";
-import { UserMap } from "../../mappers/UserMap";
-import { prisma } from "@libs/prisma";
+import { prisma } from "@shared/infra/prisma/client";
+
+import { IUserRepository } from "@modules/users/repositories";
+import { ICreateUserDto, IUserDto } from "@modules/users/dtos";
+import { UserMap } from "@modules/users/mappers/UserMap";
 
 export class UsersRepository implements IUserRepository {
   private prisma: PrismaClient;
@@ -20,11 +20,13 @@ export class UsersRepository implements IUserRepository {
     return UserMap.toHTTP(user);
   }
 
-  async findByUsername(username: string): Promise<IUserDto> {
-    return await this.prisma.usuarios.findFirst({
+  async findByUsername(username: string): Promise<IUserDto | null> {
+    const user = await this.prisma.usuarios.findFirst({
       where: {
         username,
       },
-    }) as IUserDto;
+    });
+
+    return user;
   }
 }
