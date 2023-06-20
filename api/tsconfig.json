@@ -7,7 +7,7 @@
     "baseUrl": "./src",
     "paths": {
       "@modules/*": ["modules/*"],
-      "@libs/*": ["libs/*"],
+      "@tests/*": ["__tests__/*"],
       "@shared/*": ["shared/*"],
     },                                
     "resolveJsonModule": true,                        

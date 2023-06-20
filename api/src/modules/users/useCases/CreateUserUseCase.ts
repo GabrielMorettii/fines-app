@@ -5,7 +5,7 @@ import AppError from "@shared/errors/AppError";
 import { IUserRepository } from "@modules/users/repositories";
 import { ICreateUserDto } from "@modules/users/dtos";
 import { User } from "@modules/users/entities/User";
-import { IHashProvider } from "@modules/users/providers/HashProvider/IHashProvider";
+import { IHashProvider } from "@shared/container/providers";
 @injectable()
 class CreateUserUseCase {
   constructor(

@@ -5,9 +5,7 @@ import env from '@shared/config/enviroment'
 
 import { ISignInUserDto } from "@modules/users/dtos";
 import { IUserRepository } from "@modules/users/repositories";
-
-import { IHashProvider } from "@modules/users/providers/HashProvider/IHashProvider";
-import { ITokenProvider } from "@modules/users/providers/TokenProvider/ITokenProvider";
+import { IHashProvider, ITokenProvider } from "@shared/container/providers";
 
 @injectable()
 class SignInUserUseCase {

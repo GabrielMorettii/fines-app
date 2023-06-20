@@ -1,10 +1,32 @@
 import request from "supertest";
 
 import app from "@shared/infra/http/app";
-
 import { EnumServiceTypes } from "@modules/fines/dtos";
+import { prisma } from "@shared/infra/prisma/client";
+import { fine, vehicle } from "@tests/mocks";
 
 describe("Get All Fines Controller", () => {
+  beforeAll(async () => {
+    const vehicleOperation = prisma.veiculos.create({
+      data: vehicle,
+    });
+
+    const fineOperation = prisma.multas.create({
+      data: fine,
+    });
+
+    await prisma.$transaction([vehicleOperation, fineOperation]);
+  });
+
+  afterAll(async () => {
+    await prisma.$transaction([
+      prisma.multas.deleteMany(),
+      prisma.veiculos.deleteMany(),
+    ]);
+
+    await prisma.$disconnect();
+  });
+
   describe("Success Cases", () => {
     it("Should be able to get fines related to: all services", async () => {
       const data = {
@@ -23,7 +45,7 @@ describe("Get All Fines Controller", () => {
     it("Should be able to get fines related to: detran service", async () => {
       const data = {
         service: EnumServiceTypes.DETRAN,
-        state: 'AL',
+        state: "AL",
         license_plate: "ALB8901",
       };
 
@@ -36,7 +58,7 @@ describe("Get All Fines Controller", () => {
     it("Should be able to get fines related to: dprf service", async () => {
       const data = {
         service: EnumServiceTypes.DPRF,
-        state: 'AL',
+        state: "AL",
         license_plate: "ALB8901",
         renavam: "89012345678",
         chassis: "2HGCM82633A345678",

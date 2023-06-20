@@ -1,12 +1,19 @@
 import request from "supertest";
 
 import app from "@shared/infra/http/app";
+import { prisma } from "@shared/infra/prisma/client";
 
 describe("Create User Controller", () => {
+  afterAll(async () => {
+    await prisma.usuarios.deleteMany();
+
+    await prisma.$disconnect();
+  })
+
   describe("Success Cases", () => {
     it("Should be able to create a new user", async () => {
       const data = {
-        username: "Jonh doe2",
+        username: "Jonh doe",
         password: "123456",
       };
 
