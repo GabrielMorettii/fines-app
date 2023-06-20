@@ -5,10 +5,7 @@ Este é um projeto que permite consultar informações sobre multas de trânsito
 ## 👀 Observações
 
 - Deixei os .envs prontos e visíveis de propósito.
-- Também mantive um dump do banco para facilitar durante a reprodução.
-- Caso não queira passar pelo processo de cadastro ou por qualquer outro motivo pode utilizar as credenciais:
-  - Usuário: Gabriel Moretti
-  - Senha: 123123
+- Note que a api pode demorar para buildar por estar esperando o banco ficar disponível.
 
 ## 💻 Setup do Ambiente <a name="enviroment-setup" />:
 
@@ -23,14 +20,18 @@ $ cd fines-app
 
 # Construa o ambiente:
 
-$ docker-compose up -d
+$ sh build.sh
 
-# Espere alguns segundos para o ambiente subir por completo.
+# Aguarde todos os scripts rodarem para testar a aplicação.
 
 # URLs 
 
 # cliente: (http://localhost:5173)
 # api (http://localhost:3030)
+
+# Para limpar o ambiente
+
+$ docker-compose down
 
 ```
 
@@ -39,6 +40,8 @@ $ docker-compose up -d
 <p>Testes da api:</p>
 
 ```bash
+
+# Lembre-se de parar o ambiente buildado anteriormente para começar os testes
 
 $ cd api
 
