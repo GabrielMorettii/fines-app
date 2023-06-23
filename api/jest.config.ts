@@ -2,7 +2,7 @@ import { pathsToModuleNameMapper } from "ts-jest";
 
 export default {
   // testTimeout: 20000,
-  setupFilesAfterEnv: ["<rootDir>/src/__tests__/setupAfterEnv.ts"],
+  // setupFilesAfterEnv: ["<rootDir>/src/__tests__/setupAfterEnv.ts"],
 
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
@@ -29,8 +29,8 @@ export default {
   moduleNameMapper: pathsToModuleNameMapper(
     {
       "@modules/*": ["modules/*"],
-      "@libs/*": ["libs/*"],
       "@shared/*": ["shared/*"],
+      "@tests/*": ["__tests__/*"],
     },
     {
       prefix: "<rootDir>/src/",

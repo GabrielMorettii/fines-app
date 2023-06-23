@@ -1,5 +1,7 @@
-import { multas, veiculos } from "@prisma/client";
+import { multas } from "@prisma/client";
 
 export interface IMulta extends multas {
-  veiculo?: veiculos
+  veiculo?: {
+    chassi: string;
+  }
 }

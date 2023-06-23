@@ -1,38 +1,44 @@
-import { hash } from 'bcrypt';
-import { inject, injectable } from 'tsyringe';
+import { inject, injectable } from "tsyringe";
 
 import AppError from "@shared/errors/AppError";
 
-import { ICreateUserDto } from "../dtos/ICreateUserDto";
-import { IUserRepository } from "../repositories/IUserRepository";
-
+import { IUserRepository } from "@modules/users/repositories";
+import { ICreateUserDto } from "@modules/users/dtos";
+import { User } from "@modules/users/entities/User";
+import { IHashProvider } from "@shared/container/providers";
 @injectable()
 class CreateUserUseCase {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUserRepository
-  ){}
+    @inject("UsersRepository")
+    private usersRepository: IUserRepository,
+    @inject("HashProvider")
+    private hashProvider: IHashProvider
+  ) {}
 
   async execute(data: ICreateUserDto) {
     this.validate(data);
 
-    const existentUser = await this.usersRepository.findByUsername(data.username);
+    const existentUser = await this.usersRepository.findByUsername(
+      data.username
+    );
 
     if (existentUser) {
       throw new AppError("Usuário já existe");
     }
 
-    const hashedPassword = await hash(data.password, 8);
+    const hashedPassword = await this.hashProvider.hash(data.password, 8);
 
-    const user = await this.usersRepository.create({
+    const userEntity = new User({
       username: data.username,
       password: hashedPassword,
-    })
+    });
+
+    const user = await this.usersRepository.create(userEntity);
 
     return user;
   }
 
-  validate(data: ICreateUserDto){
+  validate(data: ICreateUserDto) {
     const { username, password } = data;
 
     if (!username || !password) {

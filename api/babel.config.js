@@ -9,7 +9,7 @@ module.exports = {
       {
         alias: {
           "@modules": "./src/modules",
-          "@libs": "./src/libs",
+          "@tests/*": ["__tests__/*"],
           "@shared": "./src/shared"
         }
       }

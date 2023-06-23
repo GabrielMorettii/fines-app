@@ -8,7 +8,7 @@ import cors from 'cors'
 
 import { errorHandler } from "./middlewares/ErrorHandler";
 import { mainRouter } from "../http/routes";
-import { prisma } from "@libs/prisma";
+import { prisma } from "../prisma/client";
 
 class AppController {
   public express: Express;

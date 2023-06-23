@@ -1,17 +1,21 @@
-import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
-import { ISignInUserDto } from "../dtos/ISignInUserDto";
-import { IUserRepository } from "../repositories/IUserRepository";
-
 import AppError from "@shared/errors/AppError";
+import env from '@shared/config/enviroment'
+
+import { ISignInUserDto } from "@modules/users/dtos";
+import { IUserRepository } from "@modules/users/repositories";
+import { IHashProvider, ITokenProvider } from "@shared/container/providers";
 
 @injectable()
 class SignInUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUserRepository
+    private usersRepository: IUserRepository,
+    @inject("HashProvider")
+    private hashProvider: IHashProvider,
+    @inject("TokenProvider")
+    private tokenProvider: ITokenProvider
   ){}
 
   async execute(data: ISignInUserDto) {
@@ -21,16 +25,16 @@ class SignInUserUseCase {
       throw new AppError("Usuário ou senha inválido", 401);
     }
 
-    const isValid = await compare(data.password, existentUser.senha!);
+    const isValid = await this.hashProvider.compare(data.password, existentUser.senha!);
 
     if (!isValid) {
       throw new AppError("Usuário ou senha inválido", 401);
     }
 
-    const token = sign({}, process.env.JWT_SECRET!, {
+    const token = this.tokenProvider.sign({}, env.JWT_SECRET, {
       subject: String(existentUser.id),
-      expiresIn: "1d",
-    });
+      expiresIn: env.JWT_EXPIRES_IN,
+    })
 
     return token;
   }

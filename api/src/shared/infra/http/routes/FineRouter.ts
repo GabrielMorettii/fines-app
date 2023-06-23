@@ -1,5 +1,5 @@
-import { GetAllFinesController } from "@modules/fines/controllers/GetAllFinesController";
 import { Router } from "express";
+import { GetAllFinesController } from "@modules/fines/infra/http/controllers/GetAllFinesController";
 
 const fineRouter = Router();
 

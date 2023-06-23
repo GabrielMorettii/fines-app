@@ -1,10 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
 import AppError from "@shared/errors/AppError";
-
-import { IGetOneFineDto } from "../dtos/IGetOneFineDto";
-
-import { IFineRepository } from "../repositories/IFineRepository";
+import { IFineRepository } from "@modules/fines/repositories";
+import { IGetOneFineDto } from "@modules/fines/dtos";
 
 @injectable()
 class GetAllFineUseCase {
@@ -45,78 +43,42 @@ class GetAllFineUseCase {
 
   handleDetran(data: IGetOneFineDto) {
     return this.finesRepository.findAll({
-      where: {
-        placa_veiculo: data.license_plate,
-        servico: data.service,
-        estado: data.state,
-      },
-      include: {
-        veiculo: {
-          select: {
-            chassi: true,
-          },
-        },
-      },
+      placa_veiculo: data.license_plate,
+      servico: data.service,
+      estado: data.state,
     });
   }
 
   handleDnit(data: IGetOneFineDto) {
     return this.finesRepository.findAll({
-      where: {
-        placa_veiculo: data.license_plate,
-        servico: data.service,
-        estado: data.state,
-        veiculo: {
-          renavam: data.renavam,
-        },
-      },
-      include: {
-        veiculo: {
-          select: {
-            chassi: true,
-          },
-        },
+      placa_veiculo: data.license_plate,
+      servico: data.service,
+      estado: data.state,
+      veiculo: {
+        renavam: data.renavam,
       },
     });
   }
 
   handleDprf(data: IGetOneFineDto) {
     return this.finesRepository.findAll({
-      where: {
-        placa_veiculo: data.license_plate,
-        servico: data.service,
-        estado: data.state,
-        veiculo: {
-          renavam: data.renavam,
-          chassi: data.chassis,
-        },
-      },
-      include: {
-        veiculo: {
-          select: {
-            chassi: true,
-          },
-        },
+      placa_veiculo: data.license_plate,
+      servico: data.service,
+      estado: data.state,
+      veiculo: {
+        renavam: data.renavam,
+        chassi: data.chassis,
       },
     });
   }
 
   async handleAll(data: IGetOneFineDto) {
     let fines = await this.finesRepository.findAll({
-      where: {
-        placa_veiculo: data.license_plate,
-        estado: data.state,
-        veiculo: {
-          renavam: data.renavam,
-          chassi: data.chassis,
-        },
-      },
-      include: {
-        veiculo: {
-          select: {
-            chassi: true,
-          },
-        },
+      placa_veiculo: data.license_plate,
+      estado: data.state,
+      veiculo: {
+        renavam: data.renavam,
+        chassi: data.chassis,
       },
     });
 
