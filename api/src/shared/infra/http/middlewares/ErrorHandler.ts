@@ -12,6 +12,6 @@ export const errorHandler = (err: Error, request: Request, response: Response, n
 
   return response.status(500).json({
     status: 'error',
-    message: `Internal Server Error: ${err.message}`
+    message: `Internal Server Error`
   })
 }
