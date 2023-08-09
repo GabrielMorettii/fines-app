@@ -1,47 +1,47 @@
 <h1 align="center">Fines App 🚗</h1>
 
-Este é um projeto que permite consultar informações sobre multas de trânsito e também possui um sistema de autenticação para garantir o acesso aos dados protegidos.
+This is a project that allows you to consult information about traffic fines and also has an authentication system to ensure access to protected data.
 
-## 👀 Observações
+## 👀 Observations
 
-- Deixei os .envs prontos e visíveis de propósito.
-- Note que a api pode demorar para buildar por estar esperando o banco ficar disponível.
+- I purposely left the .envs ready and visible.
+- Note that the API may take time to build as it waits for the database to become available.
 
-## 💻 Setup do Ambiente <a name="enviroment-setup" />:
+## 💻 Environment Setup <a name="enviroment-setup" />:
 
 ```bash
-# Clone o repositório
+# Clone the repository
 
 $ git clone https://github.com/GabrielMorettii/fines-app.git
 
-# Entre na pasta do projeto:
+# Enter the project folder:
 
 $ cd fines-app
 
-# Construa o ambiente:
+# Build the environment:
 
 $ sh build.sh
 
-# Aguarde todos os scripts rodarem para testar a aplicação.
+# Wait for all scripts to run before testing the application.
 
 # URLs 
 
-# cliente: (http://localhost:5173)
+# client: (http://localhost:5173)
 # api (http://localhost:3030)
 
-# Para limpar o ambiente
+# To clean the environment
 
 $ docker-compose down
 
 ```
 
-## 🧪 Rodar os Testes <a name="tests" />:
+## 🧪 Running the Tests  <a name="tests" />:
 
-<p>Testes da api:</p>
+<p>API tests:</p>
 
 ```bash
 
-# Lembre-se de parar o ambiente buildado anteriormente para começar os testes
+# Remember to stop the previously built environment to start the tests
 
 $ cd api
 
@@ -51,19 +51,19 @@ $ npm install
 
 $ npm run test
 
-# Para parar o container docker:
+# To stop the docker container:
 
 $ docker-compose stop
 
-# A cobertura dos testes pode ser vista em: src/__tests__/coverage/lcov-report/index.html
+# The test coverage can be seen at: src/__tests__/coverage/lcov-report/index.html
 
 ```
 
-<p>Testes do cliente:</p>
+<p>Client tests:</p>
 
 ```bash
 
-# esteja no root do projeto
+# be in the root of the project
 
 $ docker-compose up -d
 
@@ -71,15 +71,15 @@ $ cd client
 
 $ npm install
 
-# interace interativa do cypress
+# interactive cypress interface
 
 $ npm run cypress:open 
 
-# ou somente pelo terminal
+# or just through the terminal
 
 $ npm run cypress:run
 
-# Para parar o container docker:
+# To stop the docker container:
 
 $ docker-compose stop
 
